@@ -1,0 +1,25 @@
+<%= link_to 'New Layout', new_site_layout_path(@site), class: 'pure-button button-green' %>
+
+<table class="pure-table pure-table-striped full-width">
+  <thead>
+    <tr>
+      <th>Layout</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% layouts.each do |layout| %>
+      <tr>
+        <td><%= layout.name %></td>
+        <td class="minimal">
+          <%= link_to 'Edit', edit_layout_path(layout), class: 'pure-button button-orange' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @layouts %>
+
+

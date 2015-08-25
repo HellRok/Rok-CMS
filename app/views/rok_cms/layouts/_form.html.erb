@@ -1,0 +1,5 @@
+<%= f.input :name, input_html: { class: 'pure-input-1' } %>
+<%= f.input :theme_id, collection: @site.themes, input_html: { class: 'pure-input-1' } %>
+<%= f.input :content, input_html: { class: 'pure-input-1', rows: 8 } %>
+<%= render 'form_actions' %>
+
