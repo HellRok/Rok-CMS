@@ -1,11 +1,13 @@
 module RokCms
   class Layout < ActiveRecord::Base
-    validates_presence_of :name, :content
+    include LayoutExtension
+    validates_presence_of :name, :content, :theme_id
     validates_length_of :name, maximum: 255
 
     belongs_to :site, class_name: 'RokBase::Site'
-    #belongs_to :theme
-    #has_many :pages
+    belongs_to :theme, class_name: 'RokCms::Theme'
+    has_many :pages, class_name: 'RokCms::Page', dependent: :restrict_with_error
+    has_many :posts, class_name: 'RokBlog::Post', dependent: :restrict_with_error if RokBlog
 
     def get_blocks
       blocks = []

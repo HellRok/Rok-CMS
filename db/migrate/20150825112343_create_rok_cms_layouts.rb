@@ -8,5 +8,8 @@ class CreateRokCmsLayouts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :rok_cms_layouts, :site_id
+    add_index :rok_cms_layouts, :theme_id
   end
 end

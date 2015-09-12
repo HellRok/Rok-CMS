@@ -1,0 +1,11 @@
+<%= f.input :title, input_html: { class: 'pure-input-1' } %>
+<%= f.input :slug, input_html: { class: 'pure-input-1' } %>
+<%= f.input :layout_id, collection: @site.layouts.map{ |l|
+    [l.name, l.id, "data-contents" => l.get_blocks.join(";")]
+  }, include_blank: false,
+  input_html: { class: 'pure-input-1', data: { contents: page.layout.get_blocks.join(";") } } %>
+<%= f.input :published, input_html: { class: 'pure-input-1' } %>
+<div class="content-fields"></div>
+<%= f.input :content, as: :hidden %>
+<%= render 'form_actions' %>
+

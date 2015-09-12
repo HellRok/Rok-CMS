@@ -1,0 +1,28 @@
+<%= link_to 'New Theme', new_site_theme_path(@site), class: 'pure-button button-green' %>
+
+<table class="pure-table pure-table-striped full-width">
+  <thead>
+    <tr>
+      <th>Theme</th>
+      <th>Version</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% themes.each do |theme| %>
+      <tr>
+        <td><%= theme.name %></td>
+        <td><%= theme.version %></td>
+        <td class="minimal">
+          <%= link_to 'Edit', edit_theme_path(theme), class: 'pure-button button-orange' %>
+          <%= link_to 'Delete', theme_path(theme), method: :delete,
+            class: 'pure-button button-red', data: { confirm: 'Are you sure you want to delete this theme?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @themes %>
+

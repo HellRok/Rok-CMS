@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Layout</th>
+      <th>Theme</th>
       <th></th>
     </tr>
   </thead>
@@ -12,8 +13,11 @@
     <% layouts.each do |layout| %>
       <tr>
         <td><%= layout.name %></td>
+        <td><%= layout.theme.name %></td>
         <td class="minimal">
           <%= link_to 'Edit', edit_layout_path(layout), class: 'pure-button button-orange' %>
+          <%= link_to 'Delete', layout_path(layout), method: :delete,
+            class: 'pure-button button-red', data: { confirm: 'Are you sure you want to delete this layout?' } %>
         </td>
       </tr>
     <% end %>

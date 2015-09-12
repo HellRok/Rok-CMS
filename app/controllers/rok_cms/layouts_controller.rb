@@ -30,10 +30,20 @@ module RokCms
       end
     end
 
+    def destroy
+      if @layout.destroy
+        flash[:success] = "#{@layout.name} has been deleted."
+        redirect_to site_layouts_path(@site)
+      else
+        flash[:error] = @layout.errors.full_messages.to_sentence
+        redirect_to site_layouts_path(@site)
+      end
+    end
+
     private
 
     def layout_params
-      params.require(:layout).permit(:name, :content, :theme_id)
+      params.require(:layout).permit(:name, :content, :post, :theme_id)
     end
 
     def layout_crumbs
