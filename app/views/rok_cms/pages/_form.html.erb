@@ -4,6 +4,8 @@
     [l.name, l.id, "data-contents" => l.get_blocks.join(";")]
   }, include_blank: false,
   input_html: { class: 'pure-input-1', data: { contents: page.layout.get_blocks.join(";") } } %>
+<%= f.input :parent_id, collection: @site.pages.in_order, label_method: :select_display,
+  input_html: { class: 'pure-input-1', data: { path: page.path } } %>
 <%= f.input :published, input_html: { class: 'pure-input-1' } %>
 <div class="content-fields"></div>
 <%= f.input :content, as: :hidden %>

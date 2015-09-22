@@ -8,7 +8,7 @@ module RokCms
     before_filter :set_site, :page_crumbs
 
     def index
-      @pages = @pages.page(params[:page])
+      @pages = @pages.in_order
       @title = 'Pages'
     end
 
@@ -48,7 +48,8 @@ module RokCms
     private
 
     def page_params
-      params.require(:page).permit(:title, :slug, :content, :layout_id, :published)
+      params.require(:page).permit(:title, :slug, :content, :layout_id, :published,
+        :parent_id)
     end
 
     def page_crumbs
