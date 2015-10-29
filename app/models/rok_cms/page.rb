@@ -35,9 +35,14 @@ module RokCms
     end
 
     def render
+      filters = RokBase::LiquidFilters
+      filters.set_site(site)
+
       Liquid::Template.parse(generate_html).render(
-        'site' => RokBase::SiteDrop.new(site),
-        'page' => RokCms::PageDrop.new(self),
+        {
+          'site' => RokBase::SiteDrop.new(site),
+          'page' => RokCms::PageDrop.new(self)
+        }, filters: [filters]
       )
     end
 
