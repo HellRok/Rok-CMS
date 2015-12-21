@@ -5,7 +5,7 @@ module RokCms
     load_and_authorize_resource :site, class: 'RokBase::Site'
     load_and_authorize_resource class: 'RokCms::Page', through: :site, shallow: true
     decorates_assigned :pages, :page
-    before_filter :set_site, :page_crumbs
+    before_filter :set_site, :page_crumbs, :stamp
 
     def index
       @pages = @pages.in_order
@@ -47,23 +47,23 @@ module RokCms
 
     private
 
-    def page_params
-      params.require(:page).permit(:title, :slug, :content, :layout_id, :published,
-        :parent_id)
-    end
+      def page_params
+        params.require(:page).permit(:title, :slug, :content, :layout_id, :published,
+          :parent_id)
+      end
 
-    def page_crumbs
-      add_crumb 'Pages', site_layouts_path(@site)
+      def page_crumbs
+        add_crumb 'Pages', site_layouts_path(@site)
 
-      if @page.present?
-        if @page.persisted?
-          add_crumb @page.title
-          @title = @page.title
-        else
-          add_crumb 'New'
-          @title = 'Page'
+        if @page.present?
+          if @page.persisted?
+            add_crumb @page.title
+            @title = @page.title
+          else
+            add_crumb 'New'
+            @title = 'Page'
+          end
         end
       end
-    end
   end
 end

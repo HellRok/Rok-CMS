@@ -6,8 +6,12 @@ module RokCms
 
     belongs_to :site, class_name: 'RokBase::Site'
     belongs_to :theme, class_name: 'RokCms::Theme'
+    belongs_to :created_by, class_name: RokBase.user_class, foreign_key: :creator_id
+    belongs_to :updated_by, class_name: RokBase.user_class, foreign_key: :updater_id
     has_many :pages, class_name: 'RokCms::Page', dependent: :restrict_with_error
-    has_many :posts, class_name: 'RokBlog::Post', dependent: :restrict_with_error if RokBlog
+    if RokBlog
+      has_many :posts, class_name: 'RokBlog::Post', dependent: :restrict_with_error
+    end
 
     def get_blocks
       blocks = []

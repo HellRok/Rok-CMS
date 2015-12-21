@@ -5,6 +5,7 @@
     <tr>
       <th>Theme</th>
       <th>Version</th>
+      <th>Updated by</th>
       <th></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= theme.name %></td>
         <td><%= theme.version %></td>
+        <td><%= theme.updated_by %></td>
         <td class="minimal">
           <%= link_to 'Edit', edit_theme_path(theme), class: 'pure-button button-orange' %>
           <%= link_to 'Delete', theme_path(theme), method: :delete,

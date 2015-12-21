@@ -5,7 +5,7 @@ module RokCms
     load_and_authorize_resource :site, class: 'RokBase::Site'
     load_and_authorize_resource class: 'RokCms::Layout', through: :site, shallow: true
     decorates_assigned :layouts, :layout
-    before_filter :set_site, :layout_crumbs
+    before_filter :set_site, :layout_crumbs, :stamp
 
     def index
       @layouts = @layouts.page(params[:page])
@@ -42,22 +42,22 @@ module RokCms
 
     private
 
-    def layout_params
-      params.require(:layout).permit(:name, :content, :post, :theme_id)
-    end
+      def layout_params
+        params.require(:layout).permit(:name, :content, :post, :theme_id)
+      end
 
-    def layout_crumbs
-      add_crumb 'Layouts', site_layouts_path(@site)
+      def layout_crumbs
+        add_crumb 'Layouts', site_layouts_path(@site)
 
-      if @layout.present?
-        if @layout.persisted?
-          add_crumb @layout.name
-          @title = @layout.name
-        else
-          add_crumb 'New'
-          @title = 'Layout'
+        if @layout.present?
+          if @layout.persisted?
+            add_crumb @layout.name
+            @title = @layout.name
+          else
+            add_crumb 'New'
+            @title = 'Layout'
+          end
         end
       end
-    end
   end
 end

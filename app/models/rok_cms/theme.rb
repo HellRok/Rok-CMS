@@ -8,6 +8,8 @@ module RokCms
     validates_length_of :name, :update_url, maximum: 255
 
     belongs_to :site, class_name: 'RokBase::Site'
+    belongs_to :created_by, class_name: RokBase.user_class, foreign_key: :creator_id
+    belongs_to :updated_by, class_name: RokBase.user_class, foreign_key: :updater_id
     has_many :layouts, class_name: 'RokCms::Layout', dependent: :restrict_with_error
 
     def render(content)

@@ -5,6 +5,7 @@
     <tr>
       <th>Layout</th>
       <th>Theme</th>
+      <th>Updated By</th>
       <th></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= layout.name %></td>
         <td><%= layout.theme.name %></td>
+        <td><%= layout.updated_by %></td>
         <td class="minimal">
           <%= link_to 'Edit', edit_layout_path(layout), class: 'pure-button button-orange' %>
           <%= link_to 'Delete', layout_path(layout), method: :delete,

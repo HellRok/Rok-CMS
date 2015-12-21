@@ -5,7 +5,7 @@ module RokCms
     load_and_authorize_resource :site, class: 'RokBase::Site'
     load_and_authorize_resource class: 'RokCms::Theme', through: :site, shallow: true
     decorates_assigned :themes, :theme
-    before_filter :set_site, :theme_crumbs
+    before_filter :set_site, :theme_crumbs, :stamp
 
     def index
       @themes = @themes.page(params[:page])
@@ -42,22 +42,22 @@ module RokCms
 
     private
 
-    def theme_params
-      params.require(:theme).permit(:name, :update_url, :version, :html, :scss, :javascript)
-    end
+      def theme_params
+        params.require(:theme).permit(:name, :update_url, :version, :html, :scss, :javascript)
+      end
 
-    def theme_crumbs
-      add_crumb 'Themes', site_themes_path(@site)
+      def theme_crumbs
+        add_crumb 'Themes', site_themes_path(@site)
 
-      if @theme.present?
-        if @theme.persisted?
-          add_crumb @theme.name
-          @title = @theme.name
-        else
-          add_crumb 'New'
-          @title = 'Theme'
+        if @theme.present?
+          if @theme.persisted?
+            add_crumb @theme.name
+            @title = @theme.name
+          else
+            add_crumb 'New'
+            @title = 'Theme'
+          end
         end
       end
-    end
   end
 end

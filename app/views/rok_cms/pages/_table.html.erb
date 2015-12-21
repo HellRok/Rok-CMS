@@ -6,6 +6,7 @@
       <th>Page</th>
       <th>Path</th>
       <th>Layout</th>
+      <th>Updated By</th>
       <th></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= page.title %></td>
         <td><%= page.path %></td>
         <td><%= page.layout %></td>
+        <td><%= page.updated_by %></td>
         <td class="minimal">
           <%= link_to 'Edit', edit_page_path(page), class: 'pure-button button-orange' %>
           <%= link_to 'Delete', page_path(page), method: :delete,
