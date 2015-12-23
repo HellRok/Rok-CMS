@@ -11,7 +11,7 @@ module RokCms
     end
 
     def load_site
-      @site = RokBase::Site.find_by(host: request.host)
+      @site = RokBase::Site.find_by_host(request.host)
       raise ActionController::RoutingError.new('Not Found') unless @site.present?
     end
   end
