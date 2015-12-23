@@ -8,14 +8,11 @@
 </div>
 
 <%= f.input :version, input_html: { class: 'pure-input-1' } %>
-<%= f.input :html, label: 'HTML', input_html: { class: 'pure-input-1', rows: 10 } %>
+<%= f.input :html, label: 'HTML', input_html: { class: 'pure-input-1 code-editor',
+  rows: 10, data: { mode: 'htmlmixed' }.merge(@editor_settings) } %>
 
-<div class="pure-g">
-  <div class="pure-u-md-1-2 pure-u-sm-1">
-    <%= f.input :scss, label: 'SCSS', input_html: { class: 'pure-input-1', rows: 10 } %>
-  </div>
-  <div class="pure-u-md-1-2 pure-u-sm-1">
-    <%= f.input :javascript, input_html: { class: 'pure-input-1', rows: 10 } %>
-  </div>
-</div>
+<%= f.input :scss, label: 'SCSS', input_html: { class: 'pure-input-1 code-editor',
+  rows: 10, data: { mode: 'sass' }.merge(@editor_settings) } %>
+<%= f.input :javascript, input_html: { class: 'pure-input-1 code-editor', rows: 10,
+  data: { mode: 'javascript' }.merge(@editor_settings) } %>
 <%= render 'form_actions' %>

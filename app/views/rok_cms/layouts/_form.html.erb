@@ -1,7 +1,9 @@
 <%= f.input :name, input_html: { class: 'pure-input-1' } %>
 <%= f.input :theme_id, collection: @site.themes, include_blank: false,
   input_html: { class: 'pure-input-1' } %>
-<%= f.input :content, label: 'Page', input_html: { class: 'pure-input-1', rows: 8 } %>
-<%= f.input :post, label: 'Post', input_html: { class: 'pure-input-1', rows: 8 } %>
+<%= f.input :content, label: 'Page', input_html: { class: 'pure-input-1 code-editor',
+  rows: 10, data: { mode: 'htmlmixed' }.merge(@editor_settings) } %>
+<%= f.input :post, label: 'Post', input_html: { class: 'pure-input-1 code-editor',
+  rows: 10, data: { mode: 'htmlmixed' }.merge(@editor_settings) } %>
 <%= render 'form_actions' %>
 

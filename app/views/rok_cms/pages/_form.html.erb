@@ -7,7 +7,8 @@
 <%= f.input :parent_id, collection: @site.pages.in_order, label_method: :select_display,
   input_html: { class: 'pure-input-1', data: { path: page.path } } %>
 <%= f.input :published, input_html: { class: 'pure-input-1' } %>
-<div class="content-fields"></div>
+<%= content_tag :div, '', class: 'content-fields',
+  data: { mode: 'htmlmixed' }.merge(@editor_settings) %>
 <%= f.input :content, as: :hidden %>
 <%= render 'form_actions' %>
 
