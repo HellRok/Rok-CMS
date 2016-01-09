@@ -4,8 +4,11 @@
     [l.name, l.id, "data-contents" => l.get_blocks.join(";")]
   }, include_blank: false,
   input_html: { class: 'pure-input-1', data: { contents: page.layout.get_blocks.join(";") } } %>
-<%= f.input :parent_id, collection: @site.pages.in_order, label_method: :select_display,
-  input_html: { class: 'pure-input-1', data: { path: page.path } } %>
+<% if @site.pages.for_page(page).in_order.any? %>
+  <%= f.input :parent_id, collection: @site.pages.for_page(page).in_order,
+    label_method: :select_display, input_html: { class: 'pure-input-1',
+    data: { path: page.path } }, include_blank: false %>
+<% end %>
 <%= f.input :published, input_html: { class: 'pure-input-1' } %>
 <%= content_tag :div, '', class: 'content-fields',
   data: { mode: 'htmlmixed' }.merge(@editor_settings) %>

@@ -11,10 +11,11 @@ module RokCms
 
     scope :published, -> { where(published: true) }
     scope :in_order, -> { order(:lft, :sort_order) }
+    scope :for_page, -> page { where.not(id: page.self_and_descendants.map(&:id)) }
 
     validates_presence_of :title, :slug, :layout_id, :content
     validates_length_of :title, :slug, maximum: 255
-    validate :unique_for_site
+    validate :unique_for_site, :not_own_parent, :no_more_than_one_root
 
     before_save :populate_path
 
@@ -59,6 +60,16 @@ module RokCms
           if site.pages.where(attr[0] => attr[1]).where.not(id: id).any?
             errors.add(attr[0], 'This is already taken within this site.')
           end
+        end
+      end
+
+      def not_own_parent
+        errors.add(:parent_id, 'Can not be own parent') if parent_id == id
+      end
+
+      def no_more_than_one_root
+        if site.pages.where(parent_id: nil).where.not(id: id).any? && parent_id.nil?
+          errors.add(:parent_id, 'There can only be one root page')
         end
       end
 
