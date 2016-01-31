@@ -64,7 +64,7 @@ module RokCms
       end
 
       def not_own_parent
-        errors.add(:parent_id, 'Can not be own parent') if parent_id == id
+        errors.add(:parent_id, 'Can not be own parent') if id && parent_id == id
       end
 
       def no_more_than_one_root
