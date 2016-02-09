@@ -5,7 +5,6 @@ module RokCms
     skip_before_filter :verify_authenticity_token
 
     def show
-      p @site
       theme = @site.themes.find_by(id: params[:theme_id])
 
       str = ''
